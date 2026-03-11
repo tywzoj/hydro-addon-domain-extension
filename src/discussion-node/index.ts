@@ -1,6 +1,7 @@
 import type { Context } from "hydrooj";
 import { DiscussionModel, Handler, SettingModel, yaml } from "hydrooj";
 
+import { SETTING_FAMILY } from "../common/const";
 import { applyI18n, CE_String } from "./i18n";
 
 const DISCUSSION_NODE_SETTING_KEY = "discussion_node";
@@ -29,7 +30,7 @@ export function applyDiscussionNodeExtension(ctx: Context) {
     ctx.inject(["setting"], (ctx) => {
         ctx.setting.DomainSetting(
             SettingModel.Setting(
-                "setting_storage",
+                SETTING_FAMILY,
                 DISCUSSION_NODE_SETTING_KEY,
                 null,
                 "yaml",
@@ -46,14 +47,21 @@ export function applyDiscussionNodeExtension(ctx: Context) {
             const instance = this as InstanceType<typeof DomainDashboardHandler>;
             const [{ domainId }] = args;
 
-            const domainDiscussionNodeSetting = instance.domain[DISCUSSION_NODE_SETTING_KEY]?.trim?.();
-            if (!domainDiscussionNodeSetting) {
-                // If the setting is not set, use the original behavior (which is to use the global setting).
+            const domainDiscussionNodeSetting = instance.domain[DISCUSSION_NODE_SETTING_KEY];
+
+            // Reference: https://github.com/hydro-dev/Hydro/blob/master/packages/hydrooj/src/handler/domain.ts
+            const nodes =
+                domainDiscussionNodeSetting &&
+                (yaml.load(domainDiscussionNodeSetting) as
+                    | Record<string, { name: string; pic?: string }[]>
+                    | null
+                    | undefined);
+
+            if (!nodes) {
+                // No custom discussion node setting in current domain, use original method to initialize discussion nodes
                 return originalPostInitDiscussionNode.apply(instance, args);
             }
 
-            // Reference: https://github.com/hydro-dev/Hydro/blob/master/packages/hydrooj/src/handler/domain.ts
-            const nodes = yaml.load(domainDiscussionNodeSetting) as Record<string, { name: string; pic?: string }[]>;
             await DiscussionModel.flushNodes(domainId);
             for (const category of Object.keys(nodes)) {
                 for (const item of nodes[category]) {
