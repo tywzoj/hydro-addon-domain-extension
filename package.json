@@ -1,0 +1,25 @@
+{
+  "name": "hydro-addon-domain-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "author": "Antares <antares.mi@outlook.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/fs-extra": "^11.0.4",
+    "@types/js-yaml": "^4",
+    "@types/node": "^25.3.0",
+    "eslint": "^10.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^17.3.0",
+    "hydrooj": "^5.0.0-beta.18",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "packageManager": "yarn@1.22.22"
+}
