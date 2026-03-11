@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "author": "Antares <antares.mi@outlook.com>",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "dependencies": {},
   "devDependencies": {
     "@eslint/js": "^10.0.1",
