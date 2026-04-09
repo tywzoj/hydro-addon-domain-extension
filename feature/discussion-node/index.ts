@@ -1,7 +1,7 @@
 import type { Context } from "hydrooj";
 import { DiscussionModel, Handler, SettingModel, yaml } from "hydrooj";
 
-import { SETTING_FAMILY } from "../common/const";
+import { SETTING_FAMILY } from "../../common/const";
 import { applyI18n, CE_String } from "./i18n";
 
 const DISCUSSION_NODE_SETTING_KEY = "discussion_node";
