@@ -4,7 +4,7 @@ import { applyDisableUserDomainProfileEdit } from "./disable-user-domain-profile
 import { applyForceSystemDisplayName } from "./force-system-display-name";
 import { applyI18n } from "./i18n";
 
-export function applyDisplayName(ctx: Context) {
+export function applyDisplayNameRestriction(ctx: Context) {
     applyI18n(ctx);
 
     applyDisableUserDomainProfileEdit(ctx);
