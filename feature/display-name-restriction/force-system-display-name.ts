@@ -2,6 +2,8 @@ import { type Context, DomainModel } from "hydrooj";
 
 import { CE_ConfigKey, getSettingKeys } from "../../common/config";
 
+const SYSTEM_DOMAIN_ID = "system" as const;
+
 export function applyForceSystemDisplayName(ctx: Context) {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     ctx.on("user/get", async (user) => {
@@ -10,11 +12,19 @@ export function applyForceSystemDisplayName(ctx: Context) {
         }
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (user._dudoc.domainId !== "system") {
-            const { displayName } = (await DomainModel.getDomainUser("system", user._udoc)) as { displayName?: string };
+        if (user._dudoc.domainId !== SYSTEM_DOMAIN_ID) {
+            const { displayName } = (await DomainModel.getDomainUser(SYSTEM_DOMAIN_ID, user._udoc)) as {
+                displayName?: string;
+            };
             if (displayName) {
                 user.displayName = displayName;
             }
+        }
+    });
+
+    ctx.on("user/import/create", async (uid, udoc: { displayName?: string }) => {
+        if (ctx.setting.get(getSettingKeys(CE_ConfigKey.ForceSystemDisplayName)) && udoc.displayName) {
+            await DomainModel.setUserInDomain(SYSTEM_DOMAIN_ID, uid, { displayName: udoc.displayName });
         }
     });
 
@@ -29,7 +39,7 @@ export function applyForceSystemDisplayName(ctx: Context) {
         }
 
         const uids = Object.keys(udict).map((uid) => Number.parseInt(uid, 10));
-        const systemUsers = DomainModel.getDomainUserMulti("system", uids).project(["uid", "displayName"]);
+        const systemUsers = DomainModel.getDomainUserMulti(SYSTEM_DOMAIN_ID, uids).project(["uid", "displayName"]);
 
         for await (const dudoc of systemUsers) {
             const { uid, displayName } = dudoc as { uid: number; displayName?: string };
