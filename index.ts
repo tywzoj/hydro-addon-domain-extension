@@ -3,6 +3,7 @@ import { type Context } from "hydrooj";
 import { applyCommonI18n } from "./common/i18n";
 import { applyDiscussionNodeExtension } from "./feature/discussion-node";
 import { applyDisplayNameRestriction } from "./feature/display-name-restriction";
+import { applyHideDomainInSearchResult } from "./feature/hide-domaion";
 
 export { Config } from "./common/config";
 
@@ -11,4 +12,5 @@ export function apply(ctx: Context) {
 
     applyDiscussionNodeExtension(ctx);
     applyDisplayNameRestriction(ctx);
+    applyHideDomainInSearchResult(ctx);
 }
