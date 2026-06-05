@@ -1752,6 +1752,13 @@
   resolved "https://registry.yarnpkg.com/@types/http-errors/-/http-errors-2.0.5.tgz#5b749ab2b16ba113423feb1a64a95dcd30398472"
   integrity sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==
 
+"@types/ip@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@types/ip/-/ip-1.1.3.tgz#5d8634b3514a51768adda5e17c91a11cdb2e5247"
+  integrity sha512-64waoJgkXFTYnCYDUWgSATJ/dXEBanVkaP5d4Sbk7P6U7cTTMhxVyROTckc6JKdwCrgnAjZMn0k3177aQxtDEA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/js-yaml@^4":
   version "4.0.9"
   resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.9.tgz#cd82382c4f902fed9691a2ed79ec68c5898af4c2"
@@ -2077,6 +2084,11 @@ chownr@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-2.0.0.tgz#15bfbe53d2eab4cf70f18a8cd68ebe5b3cb1dece"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
+
+cidr-regex@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/cidr-regex/-/cidr-regex-6.0.0.tgz#636f2b7e2c52e5f5bf3566951467a6fa13337e7b"
+  integrity sha512-zEbNjf8/Un85X0XYUR9e99CYxZrq6ko4F6Xd6wnrxpgVi9F0Y7096+H2T+RDxYGSYHP6DUptmQE4j6RdRe+f7w==
 
 co-body@^6.2.0:
   version "6.2.0"
@@ -2765,6 +2777,18 @@ inherits@2.0.4, inherits@^2.0.3, inherits@~2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
+
+ip@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ip/-/ip-2.0.1.tgz#e8f3595d33a3ea66490204234b77636965307105"
+  integrity sha512-lJUL9imLTNi1ZfXT+DU6rBBdbiKGBuay9B6xGSPVjUeQwaH1RIGqef8RZkUtHioLmSNpPR5M4HVKJGm1j8FWVQ==
+
+is-cidr@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/is-cidr/-/is-cidr-7.0.0.tgz#c60a126c1b462b88414e9153d237d12ccd714460"
+  integrity sha512-PkjeSTr7ZiDQ73R3TbGJBEOWWdC58ew5k9DCLBpYR1QtmiAPqF73TRTcXs5uZVoe3q5vMGAnl7Htp+cxnLfj7g==
+  dependencies:
+    cidr-regex "^6.0.0"
 
 is-extglob@^2.1.1:
   version "2.1.1"

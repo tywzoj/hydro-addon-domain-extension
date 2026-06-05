@@ -25,6 +25,7 @@ This is a [Hydro](https://github.com/hydro-dev/Hydro) Addon that provides extend
 - **Display Name Restriction**: Forces users to use the system display name in each domain and disallows users to edit their display name by themselves.
 - **Hide No Permission Domains**: Hide domain in search result if user has no permission to view.
 - **Hide Unjoined Default Role Users**: Hide unjoined users that have the default role in the domain user list.
+- **CDN Bypass**: Allows bypassing CDN for specific CIDR or IP, which can be useful for users in internal network.
 - ... (more features to be added)
 
 ## License
