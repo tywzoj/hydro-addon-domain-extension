@@ -4,6 +4,7 @@ export const enum CE_ConfigKey {
     ForceSystemDisplayName = "force-system-display-name",
     DisableUserEditDisplayname = "disable-user-edit-displayname",
     HideNoPermDomainInSearchResult = "hide-no-perm-domain-in-search-result",
+    HideUnjoinedDefaultRoleUsers = "hide-unjoined-default-role-users",
 }
 
 export const Config = Schema.object({
@@ -13,6 +14,9 @@ export const Config = Schema.object({
         .default(false),
     [CE_ConfigKey.HideNoPermDomainInSearchResult]: Schema.boolean()
         .description("Hide domain in search result if user has no permission to view")
+        .default(false),
+    [CE_ConfigKey.HideUnjoinedDefaultRoleUsers]: Schema.boolean()
+        .description("Hide unjoined users that have the default role in the domain user list")
         .default(false),
 }).description("Domain Extension Settings");
 
