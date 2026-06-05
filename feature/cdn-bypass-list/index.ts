@@ -9,9 +9,13 @@ export function applyCdnBypass(ctx: Context) {
         const bypassList = (ctx.setting.get(getSettingKeys(CE_ConfigKey.CdnBypass)) as string[]) ?? [];
 
         const ipAddress = handler.request.ip;
-        const shouldBypass = bypassList.some(
-            (bypass) => (isCidr(bypass) && ip.cidrSubnet(bypass).contains(ipAddress)) || ip.isEqual(ipAddress, bypass),
-        );
+        const shouldBypass = bypassList.some((bypass) => {
+            try {
+                return (isCidr(bypass) && ip.cidrSubnet(bypass).contains(ipAddress)) || ip.isEqual(ipAddress, bypass);
+            } catch {
+                return false;
+            }
+        });
 
         if (shouldBypass) {
             handler.UiContext.cdn_prefix = "/";
