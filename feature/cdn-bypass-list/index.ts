@@ -19,6 +19,7 @@ export function applyCdnBypass(ctx: Context) {
 
         if (shouldBypass) {
             handler.UiContext.cdn_prefix = "/";
+            handler.UiContext.bypass_cdn = true;
         }
     });
 }
