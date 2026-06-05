@@ -19,7 +19,7 @@ export const Config = Schema.object({
     [CE_ConfigKey.HideUnjoinedDefaultRoleUsers]: Schema.boolean()
         .description("Hide unjoined users that have the default role in the domain user list")
         .default(false),
-    [CE_ConfigKey.CdnBypass]: Schema.array(Schema.string()).description("List of CIDR to bypass CDN").default([]),
+    [CE_ConfigKey.CdnBypass]: Schema.array(Schema.string()).description("List of CIDR or IP to bypass CDN").default([]),
 }).description("Domain Extension Settings");
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
