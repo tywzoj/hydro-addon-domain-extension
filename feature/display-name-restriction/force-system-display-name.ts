@@ -1,3 +1,4 @@
+import type { Handler } from "hydrooj";
 import { type Context, DomainModel } from "hydrooj";
 
 import { CE_ConfigKey, getSettingKeys } from "../../common/config";
@@ -20,6 +21,31 @@ export function applyForceSystemDisplayName(ctx: Context) {
                 user.displayName = displayName;
             }
         }
+    });
+
+    ctx.on("handler/after/DomainUser#get", async (handler: Handler) => {
+        if (!ctx.setting.get(getSettingKeys(CE_ConfigKey.ForceSystemDisplayName))) {
+            return;
+        }
+
+        const { rudocs } = handler.response.body as { rudocs: Record<string, { _id: number; displayName?: string }[]> };
+
+        const users = (await DomainModel.getDomainUserMulti(
+            SYSTEM_DOMAIN_ID,
+            Object.values(rudocs)
+                .flat()
+                .map((d) => d._id),
+        )
+            .project(["uid", "displayName"])
+            .toArray()) as { uid: number; displayName?: string }[];
+
+        const uidDisplayNameMap = Object.fromEntries(users.map((d) => [d.uid, d.displayName]));
+
+        Object.values(rudocs).forEach((udocs) => {
+            udocs.forEach((udoc) => {
+                udoc.displayName = uidDisplayNameMap[udoc._id] || udoc.displayName;
+            });
+        });
     });
 
     ctx.on("user/import/create", async (uid, udoc: { displayName?: string }) => {
