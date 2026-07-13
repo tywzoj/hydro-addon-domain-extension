@@ -12,7 +12,7 @@ addPage(
 
 addPage(
     new NamedPage([], () => {
-        if (UserContext && UserContext._id && UiContext.hideUserDomainSetting) {
+        if (UiContext.hideUserDomainSetting) {
             $(".menu li.menu__item").has('a[href*="/home/settings/domain"]').remove();
         }
     }),
