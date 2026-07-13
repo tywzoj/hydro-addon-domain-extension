@@ -11,7 +11,7 @@ addPage(
 );
 
 addPage(
-    new NamedPage([], () => {
+    new NamedPage(["home_settings"], () => {
         if (UiContext.hideUserDomainSetting) {
             $(".menu li.menu__item").has('a[href*="/home/settings/domain"]').remove();
         }
