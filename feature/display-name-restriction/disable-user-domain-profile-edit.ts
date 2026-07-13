@@ -1,5 +1,5 @@
-import type { Handler } from "hydrooj";
-import { type Context, PrivilegeError } from "hydrooj";
+import type { Context, Handler } from "hydrooj";
+import { PRIV, PrivilegeError } from "hydrooj";
 
 import { CE_ConfigKey, getSettingKeys } from "../../common/config";
 import { CE_String } from "./i18n";
@@ -10,7 +10,9 @@ export function applyDisableUserDomainProfileEdit(ctx: Context) {
             handler.args.category === "domain" &&
             ctx.setting.get(getSettingKeys(CE_ConfigKey.DisableUserEditDisplayname))
         ) {
-            throw new PrivilegeError(CE_String.EditDomainProfile);
+            if (handler.domain?._id !== "system" || !handler.user.hasPriv(PRIV.PRIV_EDIT_SYSTEM)) {
+                throw new PrivilegeError(CE_String.EditDomainProfile);
+            }
         }
     });
 }
