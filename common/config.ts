@@ -3,6 +3,7 @@ import { Schema } from "hydrooj";
 export const enum CE_ConfigKey {
     ForceSystemDisplayName = "force-system-display-name",
     DisableUserEditDisplayname = "disable-user-edit-displayname",
+    UserProfileRestriction = "user-profile-restriction",
     HideNoPermDomainInSearchResult = "hide-no-perm-domain-in-search-result",
     HideUnjoinedDefaultRoleUsers = "hide-unjoined-default-role-users",
     CdnBypass = "cdn-bypass-list",
@@ -12,6 +13,9 @@ export const Config = Schema.object({
     [CE_ConfigKey.ForceSystemDisplayName]: Schema.boolean().description("Force system display name").default(false),
     [CE_ConfigKey.DisableUserEditDisplayname]: Schema.boolean()
         .description("Disable user edit display name")
+        .default(false),
+    [CE_ConfigKey.UserProfileRestriction]: Schema.boolean()
+        .description("Restrict user profile access with PRIV_USER_PROFILE")
         .default(false),
     [CE_ConfigKey.HideNoPermDomainInSearchResult]: Schema.boolean()
         .description("Hide domain in search result if user has no permission to view")

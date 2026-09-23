@@ -6,6 +6,7 @@ import { applyDiscussionNodeExtension } from "./feature/discussion-node";
 import { applyDisplayNameRestriction } from "./feature/display-name-restriction";
 import { applyHideUnjoinedDefaultUsers } from "./feature/hide-default-users";
 import { applyHideDomainInSearchResult } from "./feature/hide-domaion";
+import { applyUserProfileRestriction } from "./feature/user-profile-restriction";
 
 export { Config } from "./common/config";
 
@@ -17,4 +18,5 @@ export function apply(ctx: Context) {
     applyDisplayNameRestriction(ctx);
     applyHideUnjoinedDefaultUsers(ctx);
     applyHideDomainInSearchResult(ctx);
+    applyUserProfileRestriction(ctx);
 }
