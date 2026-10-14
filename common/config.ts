@@ -2,6 +2,7 @@ import { Schema } from "hydrooj";
 
 export const enum CE_ConfigKey {
     ForceSystemDisplayName = "force-system-display-name",
+    ForceManagedUser = "force-managed-user",
     DisableUserEditDisplayname = "disable-user-edit-displayname",
     UserProfileRestriction = "user-profile-restriction",
     HideNoPermDomainInSearchResult = "hide-no-perm-domain-in-search-result",
@@ -11,6 +12,9 @@ export const enum CE_ConfigKey {
 
 export const Config = Schema.object({
     [CE_ConfigKey.ForceSystemDisplayName]: Schema.boolean().description("Force system display name").default(false),
+    [CE_ConfigKey.ForceManagedUser]: Schema.boolean()
+        .description("Force managed user in domain, only works when server.allowInvite is true")
+        .default(false),
     [CE_ConfigKey.DisableUserEditDisplayname]: Schema.boolean()
         .description("Disable user edit display name")
         .default(false),

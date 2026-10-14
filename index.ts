@@ -4,6 +4,7 @@ import { applyCommonI18n } from "./common/i18n";
 import { applyCdnBypass } from "./feature/cdn-bypass-list";
 import { applyDiscussionNodeExtension } from "./feature/discussion-node";
 import { applyDisplayNameRestriction } from "./feature/display-name-restriction";
+import { applyForceManagedUserInDomain } from "./feature/force-managed-user";
 import { applyHideUnjoinedDefaultUsers } from "./feature/hide-default-users";
 import { applyHideDomainInSearchResult } from "./feature/hide-domaion";
 import { applyUserProfileRestriction } from "./feature/user-profile-restriction";
@@ -16,6 +17,7 @@ export function apply(ctx: Context) {
     applyCdnBypass(ctx);
     applyDiscussionNodeExtension(ctx);
     applyDisplayNameRestriction(ctx);
+    applyForceManagedUserInDomain(ctx);
     applyHideUnjoinedDefaultUsers(ctx);
     applyHideDomainInSearchResult(ctx);
     applyUserProfileRestriction(ctx);
