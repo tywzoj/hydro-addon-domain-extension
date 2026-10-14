@@ -13,7 +13,7 @@ export function applyForceManagedUserInDomain(ctx: Context) {
             ctx.setting.get(getSettingKeys(CE_ConfigKey.ForceManagedUser))
         ) {
             const uemails = (handler.response.body as { users: { email: string }[] }).users.map((user) => user.email);
-            const udocs = await UserModel.getMulti({ email: { $in: uemails } }).toArray();
+            const udocs = await UserModel.getMulti({ mail: { $in: uemails } }).toArray();
             const uids = udocs.map((user) => user._id);
 
             await Promise.all([
