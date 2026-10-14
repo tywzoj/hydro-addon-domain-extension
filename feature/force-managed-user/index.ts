@@ -1,18 +1,30 @@
 import type { Handler } from "hydrooj";
-import { type Context, DomainModel } from "hydrooj";
+import { type Context, DomainModel, OplogModel, UserModel } from "hydrooj";
 
 import { CE_ConfigKey, getSettingKeys } from "../../common/config";
 
 const ALLOW_INVITE_SETTING_KEY = "server.allowInvite";
+const DEFAULT_ROLE = "default";
 
 export function applyForceManagedUserInDomain(ctx: Context) {
-    ctx.on("user/import/create", async (uid) => {
+    ctx.on("handler/after/SystemUserImport#post", async (handler: Handler) => {
         if (
             ctx.setting.get(ALLOW_INVITE_SETTING_KEY) &&
-            ctx.setting.get(getSettingKeys(CE_ConfigKey.ForceManagedUser)) &&
-            ctx.domain
+            ctx.setting.get(getSettingKeys(CE_ConfigKey.ForceManagedUser))
         ) {
-            await DomainModel.setJoin(ctx.domain._id, uid, true);
+            const uemails = (handler.response.body as { users: { email: string }[] }).users.map((user) => user.email);
+            const udocs = await UserModel.getMulti({ email: { $in: uemails } }).toArray();
+            const uids = udocs.map((user) => user._id);
+
+            await Promise.all([
+                DomainModel.setUserRole(handler.domain._id, uids, DEFAULT_ROLE, true),
+                OplogModel.log(handler, "domain.setRole", {
+                    uid: uids,
+                    role: DEFAULT_ROLE,
+                    join: true,
+                    from: "user-import",
+                }),
+            ]);
         }
     });
 
